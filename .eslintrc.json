@@ -19,6 +19,7 @@
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
     "camelcase": "off",
+    "no-useless-constructor": "off",
     "@typescript-eslint/camelcase": "off",
 
     // configuracao para prefixo de i em interface
