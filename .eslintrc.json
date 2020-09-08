@@ -1,7 +1,9 @@
 {
   "env": {
+    //variaveis ou funções globais que vamos utilizar
     "es2020": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "airbnb-base",
