@@ -2,6 +2,12 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
+// import User from '../../typeorm/entities/User';
+
+// interface SendUser {
+//   user: Omit<User, 'password'>;
+//   token: string;
+// }
 
 export default class SessionsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -14,6 +20,7 @@ export default class SessionsController {
       password,
     });
 
+    // depois debugar isso aqui, senha removida para não retornar na session
     delete user.password;
 
     return response.json({ user, token });
