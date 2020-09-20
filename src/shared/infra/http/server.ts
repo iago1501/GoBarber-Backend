@@ -1,8 +1,10 @@
 import 'reflect-metadata';
+import 'dotenv/config'; // dar acesso as variáveis de ambiente
 
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
-import cors from 'cors';
+import cors from 'cors'; // permitir acesso de outros IP's para a API
+import { errors } from 'celebrate'; // permitir resposta dos erros do celebrate
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
@@ -17,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
+app.use(errors());
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   // Erro originado através da minha aplicação
