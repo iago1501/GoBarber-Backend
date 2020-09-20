@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
 // import User from '../../typeorm/entities/User';
@@ -21,8 +22,9 @@ export default class SessionsController {
     });
 
     // depois debugar isso aqui, senha removida para não retornar na session
-    delete user.password;
+    // delete user.password;
+    // class-transformer resolve esse problema
 
-    return response.json({ user, token });
+    return response.json({ user: classToClass(user), token });
   }
 }

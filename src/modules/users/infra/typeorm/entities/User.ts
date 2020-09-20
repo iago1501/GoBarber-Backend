@@ -7,6 +7,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { Exclude, Expose } from 'class-transformer';
+
 /**
  *Entity funciona como um decorator, passando a classe como parâmetro,
  poderia também ser algo como Entity(Appointment) ao final da clase no export
@@ -27,6 +29,7 @@ class User {
   avatar: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @CreateDateColumn()
@@ -34,6 +37,13 @@ class User {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'avatar_url' })
+  getAvatar_url(): string | null {
+    return this.avatar
+      ? `${process.env.APP_API_URL}/files/${this.avatar}`
+      : null;
+  }
 }
 
 export default User;
