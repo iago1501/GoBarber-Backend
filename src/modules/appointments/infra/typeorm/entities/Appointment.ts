@@ -38,6 +38,8 @@ class Appointment {
   @Column() // Por default entrará como varchar se não passar params
   user_id: string;
 
+  // @ManyToOne(() => User, { eager: true }) sempre traz os dados
+  // @ManyToOne(() => User, { lazy: true }) await appoinemtn.user, permite buscar os dados no relacionamento
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
