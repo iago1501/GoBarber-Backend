@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { container } from 'tsyringe';
 
-import ListProviderAppointments from '@modules/appointments/services/ListProviderAppointmentsService';
+import ListProviderAppointmentsService from '@modules/appointments/services/ListProviderAppointmentsService';
 import { classToClass } from 'class-transformer';
 
 // não podemos enviar body em requisições do tipo get
@@ -12,9 +12,11 @@ export default class ProviderAppointmentsController {
     const provider_id = request.user.id;
     const { day, month, year } = request.query;
 
-    const createAppointment = container.resolve(ListProviderAppointments);
+    const listProviderAppointments = container.resolve(
+      ListProviderAppointmentsService,
+    );
 
-    const appointments = await createAppointment.execute({
+    const appointments = await listProviderAppointments.execute({
       day: Number(day),
       month: Number(month),
       year: Number(year),
