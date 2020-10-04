@@ -1,10 +1,11 @@
 import nodemailer, { Transporter } from 'nodemailer';
-import { injectable, inject } from 'tsyringe';
 import aws from 'aws-sdk';
 import mailConfig from '@config/mail';
-import IMailTemplateProvider from '../../MailTemplateProvider/models/IMailTemplateProvider';
-import ISendMailDTO from '../dtos/ISendMailDTO';
+import { injectable, inject } from 'tsyringe';
+
+import IMailTemplateProvider from '@shared/container/providers/MailTemplateProvider/models/IMailTemplateProvider';
 import IMailProvider from '../models/IMailProvider';
+import ISendMailDTO from '../dtos/ISendMailDTO';
 
 @injectable()
 export default class SESMailProvider implements IMailProvider {
@@ -28,7 +29,8 @@ export default class SESMailProvider implements IMailProvider {
     subject,
     templateData,
   }: ISendMailDTO): Promise<void> {
-    const { email, name } = mailConfig.defaults.from;
+    const { name, email } = mailConfig.defaults.from;
+
     await this.client.sendMail({
       from: {
         name: from?.name || name,

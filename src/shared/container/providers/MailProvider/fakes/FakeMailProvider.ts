@@ -1,10 +1,5 @@
-import ISendMailDTO from '../dtos/ISendMailDTO';
 import IMailProvider from '../models/IMailProvider';
-
-interface Message {
-  to: string;
-  body: string;
-}
+import ISendMailDTO from '../dtos/ISendMailDTO';
 
 export default class FakeMailProvider implements IMailProvider {
   private messages: ISendMailDTO[] = [];

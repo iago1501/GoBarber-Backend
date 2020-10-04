@@ -1,4 +1,3 @@
-import AppError from '@shared/errors/AppError';
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 
 import ListProviderMonthAvailability from './ListProviderMonthAvailabilityService';
@@ -13,11 +12,9 @@ describe('ListProviderMonthAvailability', () => {
       fakeAppointmentsRepository,
     );
   });
+  // TODO: This test is failing
+
   it('should be able to list the month availability from provider', async () => {
-    // await fakeAppointmentsRepository.create({
-    //   provider_id: 'user',
-    //   date: new Date(2020, 3, 20, 8, 0, 0),
-    // });
     // Brasil UTC-3, ao salvar no banco UTC
     await fakeAppointmentsRepository.create({
       provider_id: 'provider',
